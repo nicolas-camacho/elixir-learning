@@ -8,9 +8,8 @@ defmodule Rules do
     false
   """
   @spec eat_ghost?(power_pellet_active? :: boolean(), touching_ghost? :: boolean()) :: boolean()
-  def eat_ghost?(power_pellet_active?, touching_ghost?) do
-    power_pellet_active? and touching_ghost?
-  end
+  def eat_ghost?(power_pellet_active?, touching_ghost?),
+    do: power_pellet_active? and touching_ghost?
 
   @doc """
   Determines if pacman scored
@@ -21,9 +20,8 @@ defmodule Rules do
     true
   """
   @spec score?(touching_power_pellet? :: boolean(), touching_dot? :: boolean()) :: boolean()
-  def score?(touching_power_pellet?, touching_dot?) do
-    touching_power_pellet? or touching_dot?
-  end
+  def score?(touching_power_pellet?, touching_dot?),
+    do: touching_power_pellet? or touching_dot?
 
   @doc """
   Tells if pacman losed
@@ -34,9 +32,10 @@ defmodule Rules do
     true
   """
   @spec lose?(power_pellet_active? :: boolean(), touching_ghost? :: boolean()) :: boolean()
-  def lose?(power_pellet_active?, touching_ghost?) do
-    not power_pellet_active? and touching_ghost?
-  end
+  def lose?(power_pellet_active?, touching_ghost?),
+    do:
+      touching_ghost? and
+        not power_pellet_active?
 
   @doc """
   Tells if pacman win
@@ -51,7 +50,8 @@ defmodule Rules do
           power_pellet_active? :: boolean(),
           touching_ghost :: boolean()
         ) :: boolean()
-  def win?(has_eaten_all_dots?, power_pellet_active?, touching_ghost?) do
-    has_eaten_all_dots? and not lose?(power_pellet_active?, touching_ghost?)
-  end
+  def win?(has_eaten_all_dots?, power_pellet_active?, touching_ghost?),
+    do:
+      has_eaten_all_dots? and
+        not lose?(power_pellet_active?, touching_ghost?)
 end
